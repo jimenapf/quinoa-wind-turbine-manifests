@@ -12,7 +12,7 @@ spec:
     - name: IMAGE_NAME
       value: quay.io/modzelewski/quinoa-wind-turbine
     - name: GIT_REPO
-      value: 'https://github.com/gmodzelewski/quinoa-wind-turbine.git'
+      value: 'https://github.com/StinkyBenji/quinoa-wind-turbine.git'
     - name: GIT_REVISION
       value: main
     - name: GIT_BRANCH

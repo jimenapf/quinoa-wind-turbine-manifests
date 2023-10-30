@@ -13,7 +13,7 @@ spec:
       - name: repoUrl
         value: 'https://github.com/StinkyBenji/quinoa-wind-turbine-manifests'
       - name: applicationGitUrl
-        value: 'https://github.com/gmodzelewski/quinoa-wind-turbine.git'
+        value: 'https://github.com/StinkyBenji/quinoa-wind-turbine.git'
       - name: image
         value: 'quay.io/modzelewski/quinoa-wind-turbine'
       - name: imageTag

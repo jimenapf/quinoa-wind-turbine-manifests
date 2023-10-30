@@ -7,7 +7,7 @@ spec:
   params:
   - name: GIT_REVISION
     type: string
-  - default: {{ coalesce .Values.applicationGitUrl "https://github.com/gmodzelewski/quinoa-wind-turbine.git" }}
+  - default: {{ coalesce .Values.applicationGitUrl "https://github.com/StinkyBenji/quinoa-wind-turbine.git" }}
     name: GIT_REPO
     type: string
   - default: "empty"
