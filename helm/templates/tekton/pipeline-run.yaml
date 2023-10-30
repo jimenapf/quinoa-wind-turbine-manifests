@@ -16,7 +16,7 @@ spec:
     - name: GIT_BRANCH
       value: 'main'
     - name: MANIFESTS_GIT_REPO
-      value: 'https://github.com/gmodzelewski/quinoa-wind-turbine-manifests.git'
+      value: 'https://github.com/StinkyBenji/quinoa-wind-turbine-manifests.git'
     - name: MANIFESTS_GIT_BRANCH
       value: 'main'
   pipelineRef:
