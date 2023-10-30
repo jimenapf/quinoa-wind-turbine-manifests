@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1 
+kind: Application
+metadata:
+  name: wind-turbine-dev-app
+  namespace: openshift-gitops 
+spec:
+  project: default 
+  source:
+    repoURL: "https://github.com/StinkyBenji/quinoa-wind-turbine-manifests"
+    path: helm
+    helm:
+      parameters:
+      - name: repoUrl
+        value: 'https://github.com/StinkyBenji/quinoa-wind-turbine-manifests'
+      - name: applicationGitUrl
+        value: 'https://github.com/gmodzelewski/quinoa-wind-turbine.git'
+      - name: image
+        value: 'quay.io/modzelewski/quinoa-wind-turbine'
+      - name: imageTag
+        value: 'latest'
+      - name: imageDigest
+        value: 'sha256:d282beecc939c8d0aafd6a52f99113162dea3c353dacd4c55a07846c8b1b6c2b'
+      - name: followChangesForBranch
+        value: 'main'
+      - name: stage
+        value: 'dev'
+      - name: disableSecretsDeployment
+        value: 'true'
+  destination:
+    server: 'https://kubernetes.default.svc' 
+    namespace: 'gitops-demo-dev'
+  syncPolicy: 
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+  ignoreDifferences:
+  - group: image.openshift.io
+    kind: ImageStream
+    jsonPointers:
+    - /spec/tags
+  - group: apps.openshift.io
+    kind: DeploymentConfig
+    jsonPointers:
+    - /spec/template/spec/containers/0/image
