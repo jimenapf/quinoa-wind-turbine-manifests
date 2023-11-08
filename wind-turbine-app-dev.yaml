@@ -15,7 +15,7 @@ spec:
       - name: applicationGitUrl
         value: 'https://github.com/StinkyBenji/quinoa-wind-turbine.git'
       - name: image
-        value: 'quay.io/modzelewski/quinoa-wind-turbine'
+        value: 'quay.io/stbenji/quinoa-wind-turbine'
       - name: imageTag
         value: 'latest'
       - name: imageDigest
