@@ -24,6 +24,8 @@ spec:
         value: 'main'
       - name: disableSecretsDeployment
         value: 'true'
+      - name: configPath
+        value: 'config'
   destination:
     server: 'https://kubernetes.default.svc' 
     namespace: 'quinoa-wind-turbine'

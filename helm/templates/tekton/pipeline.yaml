@@ -106,7 +106,7 @@ spec:
     - name: NEW_DIGEST
       value: $(tasks.buildah.results.IMAGE_DIGEST)
     - name: CONFIG_JSON_PATH
-      value: {{ coalesce .Values.configPath "config") }}
+      value: {{ coalesce .Values.configPath "config" }}
     runAfter:
     - buildah
     taskRef:
