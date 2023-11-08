@@ -95,6 +95,8 @@ spec:
     workspaces:
     - name: source
       workspace: source
+    - name: dockerconfig
+      workspace: dockerconfig
   - name: git-update-deployment
     params:
     - name: GIT_REPOSITORY
