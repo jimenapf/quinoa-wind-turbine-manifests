@@ -1,21 +1,16 @@
 # Wind Turbine GitOps repo
 
-The refactored manifest repository using OpenShift GitOps with ApplicationSets and git file generator for parameters.
-
-The main file here is the `wind-turbine-app.yaml` - file which contains an ApplicationSet using 
+The main file here is the `wind-turbine-app.yaml` - file which contains an Application using 
 - the `helm` chart folder for templates and 
-- the `stages/*/config.js` files for parameters.
+- the `config/config.js` files for parameters.
 
 For easy install there is a shell script which does all kinds of installations that are needed.
 
 ## Installation
 
 1. fork this repo
-2. `0-github-secret.yaml`: fill credentials for github from user settings -> Developer settings -> Personal access tokens -> Fine-grained tokens
-3. `0-quay-secret.yaml`: fill credentials for quay from Robot Accounts -> Create Robot Account -> Kubernetes Secret
-4. run `1-install.sh`
-
-**INFO: Install script is work-in-progress. Not all resources, that are used in some steps, are created fast enough. If it doesn't work, just run it multiple times.**
+2. `0-github-secret-tmpl.yaml`: fill credentials for github from user settings -> Developer settings -> Personal access tokens -> Fine-grained tokens
+3. `0-quay-secret-tmpl.yaml`: fill credentials for quay from Robot Accounts -> Create Robot Account -> Kubernetes Secret
 
 ## Webhooks
 
@@ -34,7 +29,6 @@ This application uses multiple tools which are installed via script on a clean e
   - Reloader
   - Sealed Secrets
 
-See the install shell script `1-install.sh` for further details`.
 The applications can be installed manually via helm install as well. Change the values file according to your needs and install.
 
 ## Bugfixing:
