@@ -106,7 +106,7 @@ spec:
     - name: NEW_DIGEST
       value: $(tasks.buildah.results.IMAGE_DIGEST)
     - name: CONFIG_JSON_PATH
-      value: {{ printf "stages/%s" (coalesce .Values.stage "dev") }}
+      value: {{ coalesce .Values.configPath "config") }}
     runAfter:
     - buildah
     taskRef:

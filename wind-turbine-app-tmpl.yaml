@@ -1,34 +1,32 @@
 apiVersion: argoproj.io/v1alpha1 
 kind: Application
 metadata:
-  name: wind-turbine-dev-app
+  name: wind-turbine-app
   namespace: openshift-gitops 
 spec:
   project: default 
   source:
-    repoURL: "https://github.com/StinkyBenji/quinoa-wind-turbine-manifests"
+    repoURL: "<your-forked-manifests-repo>"
     path: helm
     helm:
       parameters:
       - name: repoUrl
-        value: 'https://github.com/StinkyBenji/quinoa-wind-turbine-manifests'
+        value: '<your-forked-manifests-repo>'
       - name: applicationGitUrl
-        value: 'https://github.com/StinkyBenji/quinoa-wind-turbine.git'
+        value: '<your-forked-app-repo>'
       - name: image
-        value: 'quay.io/stbenji/quinoa-wind-turbine'
+        value: '<your-mirrored-image>'
       - name: imageTag
         value: 'latest'
       - name: imageDigest
-        value: 'sha256:d282beecc939c8d0aafd6a52f99113162dea3c353dacd4c55a07846c8b1b6c2b'
+        value: '<the-image-digest>'
       - name: followChangesForBranch
         value: 'main'
-      - name: stage
-        value: 'dev'
       - name: disableSecretsDeployment
         value: 'true'
   destination:
     server: 'https://kubernetes.default.svc' 
-    namespace: 'gitops-demo-dev'
+    namespace: 'quinoa-wind-turbine'
   syncPolicy: 
     automated:
       selfHeal: true

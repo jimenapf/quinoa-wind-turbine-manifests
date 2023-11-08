@@ -23,4 +23,3 @@ spec:
     app: quinoa-wind-turbine
   sessionAffinity: None
   type: ClusterIP
-
