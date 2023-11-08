@@ -157,4 +157,5 @@ spec:
   workspaces:
   - name: source
   - name: maven-settings
+  - name: dockerconfig
 {{- end }}
