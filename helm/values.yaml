@@ -1,7 +1,7 @@
 manifestsGitUrl: 'https://github.com/StinkyBenji/quinoa-wind-turbine-manifests'
 manifestsGitBranch: main
 applicationGitUrl: 'https://github.com/StinkyBenji/quinoa-wind-turbine.git'
-image: 'quay.io/modzelewski/quinoa-wind-turbine'
+image: 'quay.io/stbenji/quinoa-wind-turbine'
 imageTag: latest # Overwrite this value in the applicationSet - wind-turbine-app.yaml
 # imageDigest: sha256@xxx # Overwrite this value in the applicationSet - wind-turbine-app.yaml
 # followChangesForBranch:  # default: empty -> if set, tekton files get created
