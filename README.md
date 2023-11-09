@@ -9,7 +9,8 @@ For easy install there is a shell script which does all kinds of installations t
 ## Installation
 
 1. fork this repo
-2. `0-github-secret-tmpl.yaml`: fill credentials for github from user settings -> Developer settings -> Personal access tokens -> Fine-grained tokens
+2. `0-github-secret-tmpl.yaml`: fill credentials for github from user settings -> Developer settings -> Personal access tokens -> Fine-grained tokens 
+  check the repository permissions: `content: Read and Write`  
 3. `0-quay-secret-tmpl.yaml`: fill credentials for quay from Robot Accounts -> Create Robot Account -> Kubernetes Secret
 
 ## Webhooks
