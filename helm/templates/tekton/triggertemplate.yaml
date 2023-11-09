@@ -37,7 +37,4 @@ spec:
         - name: maven-settings
           persistentVolumeClaim:
             claimName: build-cache-pvc
-        - name: dockerconfig
-          secret:
-            secretName: quay-push-secret
 {{- end }}
