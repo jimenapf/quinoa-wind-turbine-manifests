@@ -82,7 +82,6 @@ NOTE: the GitHub and Quay Setup can be done in parallel
 
 == GitHub SetUp
 - Fork the Git repo: https://github.com/StinkyBenji/quinoa-wind-turbine-manifests
-
 - And fork the Git repo: https://github.com/StinkyBenji/quinoa-wind-turbine
 - After you forked the repo, please run:
 [.console-output]
@@ -90,21 +89,6 @@ NOTE: the GitHub and Quay Setup can be done in parallel
 ----
 git clone <your-forked-repos>	
 ----
-- Create a https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token[fine-grained personal access token] (one token is enough for one team)
-- Give the following permissions to your token:
-[cols="2*,2*.",options="header,+attributes"]
-|===
-|**Name**|**Access**
-| Administration| Read Only
-| Metadata| Read Only
-| Content| Read and Write
-| Commit Statuses | Read and Write
-| Push | Read and Write
-| Webhooks| Read and Write
-|===
-- Ideally, set repository access to only select repositories, and select the repositories that you just forked
-
-❗❗❗Save your token to a safe place!
 
 == Quay SetUp
 
@@ -121,12 +105,6 @@ skopeo copy docker://quay.io/stbenji/quinoa-wind-turbine docker://quay.io/<your-
 == Racing car deployment
 - Create the namespace: *quinoa-wind-turbine*
 - The following steps will be executed in the same namespace
-- Update the https://raw.githubusercontent.com/StinkyBenji/quinoa-wind-turbine-manifests/main/0-github-secret-tmpl.yaml[0-github-secret-tmpl.yaml] to create a secret named `git-user-pass`
-- Update the https://raw.githubusercontent.com/StinkyBenji/quinoa-wind-turbine-manifests/main/0-quay-secret-tmpl.yaml[0-quay-secret-tmpl.yaml] to create a secret named `quay-push-secret` 
-- Link both secret to `pipeline` service account 
- 
- 🥸 HINT: *oc secret link*
-
 - Go to the cloned *quinoa-wind-turbine-manifests* repo directory on your local machine
 - (provided that you are logged in to OpenShift on your local as well)
 - Use the following command to create the deployment secret:
@@ -153,31 +131,55 @@ echo "The game link: https://$(oc get route quinoa-wind-turbine -o jsonpath='{.s
 
 ==  👻 BONUS TASK 1
 
-GitHub setup:
+== GitHub SetUp
+- Create a https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token[fine-grained personal access token] (one token is enough for one team)
+- Give the following permissions to your token:
+[cols="2*,2*.",options="header,+attributes"]
+|===
+|**Name**|**Access**
+| Administration| Read Only
+| Metadata| Read Only
+| Content| Read and Write
+| Commit Statuses | Read and Write
+| Webhooks| Read and Write
+|===
+- Ideally, set repository access to only select repositories, and select the repositories that you just forked
 
-- Go to the foked *quinoa-wind-turbine* repo and create a webhook in your GitHub repository
+- Go to your cloned `quinoa-wind-turbine-manifests` repo folder
+- Update the https://raw.githubusercontent.com/StinkyBenji/quinoa-wind-turbine-manifests/main/0-github-secret-tmpl.yaml[0-github-secret-tmpl.yaml] to create a secret named `git-user-pass`
+- Update the https://raw.githubusercontent.com/StinkyBenji/quinoa-wind-turbine-manifests/main/0-quay-secret-tmpl.yaml[0-quay-secret-tmpl.yaml] to create a secret named `quay-push-secret` 
+- Link both secret to `pipeline` service account 
+ 
+ 🥸 HINT: *oc secret link*
+
+- Go to the foked *quinoa-wind-turbine* repo on GitHub and create a webhook in your GitHub repository
 - Go to Repository -> Settings -> Webhooks -> Add webhook
 - Payload URL: 
 [.console-output]
 [source,bash,subs="attributes+,+macros"]	
 ----	
-echo "https://$(oc get route el-wind-turbine -o jsonpath='{.spec.host}{"\n"}' -n quinoa-wind-turbine)"
+echo "http://$(oc get route el-wind-turbine -o jsonpath='{.spec.host}{"\n"}' -n quinoa-wind-turbine)"
 ----
 - Content type: `application/json`
 - You can ignore the secret field
 - Just push event is enough
 - Create the webhook
+
+== Quay SetUp
+
+- Create a https://access.redhat.com/documentation/en-us/red_hat_quay/3.3/html/use_red_hat_quay/use-quay-manage-repo#allow-robot-access-user-repo[robot account] 
+- Once the robot account is ready, click on the account and copy/download the Kubernetes Secret credentials 
+- Add the robot account to the image repository and give it *Write* permission
+
+- Go to your cloned `quinoa-wind-turbine` repo folder
 - Change `const` in the `src/main/webui/src/Config.js`
-e.g. `export const ENABLE_SHAKING = true; // "false"`
+e.g. `export const ENABLE_SHAKING = true;
 - Commit and push the change
 - Observe the `pipelineruns` in the namespace 
 - Observe the Argo CD application rollout
 - Reload the game when the application is ready
-
-==  👻 BONUS TASK 2
-If you need to automate the whole deployment process (Of course, some manual steps, e.g. GitHub token creation and Quay robot account creation, are inevitable), how would the implementation look like? 
-- Being able to explain the idea is enough for this task
-- If the team can present the idea with a small design, the extra points will be granted.
+- If you can explain the underlying architecture of the application deployment workflow,
+you know what you are gonna get 😏
 
 == THE END 🥳 🥳 🥳
 
